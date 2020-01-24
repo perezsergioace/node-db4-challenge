@@ -13,7 +13,7 @@ exports.up = function(knex) {
             .index();
     })
 
-    .createTable("ingridients", tbl => {
+    .createTable("ingredients", tbl => {
         tbl.increments();
 
         tbl.string("name", 128)
@@ -21,7 +21,7 @@ exports.up = function(knex) {
             .index();
     })
 
-    .createTable("recipe_ingridients", tbl => {
+    .createTable("recipe_ingredients", tbl => {
         tbl.increments();
 
         tbl.integer("recipe_id")
@@ -32,11 +32,11 @@ exports.up = function(knex) {
             .onDelete("RESTRICT")
             .onUpdate("CASCADE"); 
 
-        tbl.integer("ingridient_id")
+        tbl.integer("ingredient_id")
             .unsigned()
             .notNullable()
             .references("id")
-            .inTable("ingridients")
+            .inTable("ingredients")
             .onDelete("RESTRICT")
             .onUpdate("CASCADE"); 
 
@@ -47,7 +47,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists("recipe_ingridients")
-        .dropTableIfExists("ingridients")
+        .dropTableIfExists("recipe_ingredients")
+        .dropTableIfExists("ingredients")
         .dropTableIfExists("recipes")
 };
